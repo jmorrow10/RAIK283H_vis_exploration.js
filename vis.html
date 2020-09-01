@@ -32,17 +32,86 @@
     // create an array with nodes
     var nodes = new vis.DataSet([{
       id: 1,
-      label: 'Node 1',
+      label: 'Dan',
     }, {
       id: 2,
-      label: 'Node 2',
-    }, ]);
+      label: 'Michael',
+    }, {
+      id: 3,
+      label: 'Devin',
+      color:{
+        background:'yellow',
+        border:'orange',
+        highlight:{
+          background:'yellow',
+          border:'orange'
+        }
+      }
+    },{
+      id: 4,
+      label: 'Justin',
+      color:{
+        background:'yellow',
+        border:'orange',
+        highlight:{
+          background:'yellow',
+          border:'orange'
+        }
+      }
+    },{
+      id: 5,
+      label: 'Parker'
+    },{
+      id: 6,
+      label: 'Sophie'
+    },{
+      id: 7,
+      label: 'Anna'
+    },{
+      id: 8,
+      label: 'Kally'
+    },{
+      id: 9,
+      label: 'Nicole'
+    },{
+      id: 10,
+      label: 'Cole'
+    } ]);
 
     // create an array with edges
     var edges = new vis.DataSet([{
-      from: 1,
+      id:1,
+      from: 3,
       to: 2
-    }, ]);
+    }, {
+      id:2,
+      from:3,
+      to:4
+    },{
+      id:3,
+      from:1,
+      to:2
+    },{
+      id:4,
+      from:1,
+      to:5
+    },{
+      id:5,
+      from:6,
+      to:7
+    },{
+      id:6,
+      from:7,
+      to:9
+    },{
+      id:7,
+      from:6,
+      to:8
+    },{
+      id:8,
+      from:8,
+      to:9
+    } ]);
 
     // create a network
     var container = document.getElementById('mynetwork');
@@ -50,12 +119,36 @@
       nodes: nodes,
       edges: edges
     };
-    var options = {};
+    var options = {nodes:{color:{background:'red', border:'black',highlight:{background:'red',border:'black'}}, shape:'box'}};
     var network = new vis.Network(container, data, options);
+
+    //print roomate ids
+    var items = edges.get({
+      fields: ['from'],
+      filter: function(item){
+        return (item.to === 4);
+      }
+    });
+
+    for(let i = 0; i < items.length; i++){
+      console.log(items[i].from);
+    }
+
+    //print roomate ids
+    items = edges.get({
+      fields: ['to'],
+      filter: function(item){
+        return (item.from === 4);
+      }
+    });
+
+    for(let i = 0; i < items.length; i++){
+      console.log(items[i].to);
+    }
+
+
+    
   </script>
-
-
-
 
 </body>
 
